@@ -2,8 +2,7 @@ name: Run Gold Scraper
 
 on:
   schedule:
-    # Chạy mỗi 15 phút (Ổn định hơn 5 phút trên GitHub Actions)
-    # Nếu muốn 5 phút, dùng: '*/5 * * * *'
+    # Chạy mỗi 15 phút (ổn định)
     - cron: '*/15 * * * *'
   workflow_dispatch:
     # Thêm nút "Run workflow" để chạy thủ công nếu cần
@@ -19,12 +18,13 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11' # Hoặc '3.12'
+          python-version: '3.11' 
 
-      - name: Install dependencies
+      - name: Install dependencies (Lightweight)
         run: |
-          pip install -r requirements.txt
-
+          # SỬA Ở ĐÂY: Dùng file requirements mới, nhẹ hơn
+          pip install -r scraper-requirements.txt
+      
       - name: Run Scraper
         env:
           # Lấy Secret bạn đã tạo
