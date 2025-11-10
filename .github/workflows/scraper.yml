@@ -2,8 +2,8 @@ name: Run Gold Scraper
 
 on:
   schedule:
-    # Chạy mỗi 30 phút (ổn định)
-    - cron: '*/30 * * * *'
+    # Chạy mỗi 60 phút (ổn định)
+    - cron: '*/60 * * * *'
   workflow_dispatch:
     # Thêm nút "Run workflow" để chạy thủ công nếu cần
 
