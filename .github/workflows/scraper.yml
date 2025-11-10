@@ -1,0 +1,33 @@
+name: Run Gold Scraper
+
+on:
+  schedule:
+    # Chạy mỗi 15 phút (Ổn định hơn 5 phút trên GitHub Actions)
+    # Nếu muốn 5 phút, dùng: '*/5 * * * *'
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+    # Thêm nút "Run workflow" để chạy thủ công nếu cần
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11' # Hoặc '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Scraper
+        env:
+          # Lấy Secret bạn đã tạo
+          MONGODB_ATLAS_URI: ${{ secrets.MONGODB_ATLAS_URI }}
+        run: |
+          python scraper.py
